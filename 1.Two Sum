@@ -1,0 +1,64 @@
+ // Brute force   O(n2)
+ vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res;
+        if(nums.size()<2)
+            return res;
+        for(int i=0;i<nums.size();i++)
+        {
+            for(int j=i+1;j<nums.size();j++)
+            {
+            if(nums[i]+nums[j]==target)
+            {
+                res.push_back(i);
+                res.push_back(j);
+            }
+        }
+        }
+       return res; 
+    }
+    
+    //Hasing O(n)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res;
+        if(nums.size()<2)
+            return res;
+            map<int,int> m;
+        map<int,int> :: iterator it;
+        for(int i=0;i<nums.size();i++)
+        {
+            int req=target-nums[i];
+            if(m.count(req))
+            {
+                it=m.find(req);
+                res.push_back(it->second);
+                res.push_back(i);
+                
+            }
+            else
+                m.insert({nums[i],i});
+        }
+       return res; 
+    }
+    
+    
+    //Wrong approach
+    if we sort input array will change and result into wrong ndices
+       /* sort(nums.begin(),nums.end());
+        int i=0;
+        int j=nums.size()-1;
+        
+        while(i<j)
+        {
+            int sum=nums[i]+nums[j];
+            if(sum==target)
+            {
+                res.push_back(i);
+                res.push_back(j);
+                break;
+            }
+            else if(sum>target)
+                j--;
+            else
+                i++;
+                   }
+                   }
